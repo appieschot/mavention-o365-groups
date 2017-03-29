@@ -1,0 +1,35 @@
+<div class="mv-spinner-wrapper" ng-show="vm.loading">
+  <div class="mv-spinner"></div>
+  <div class="ms-font-l">
+    Loading groups ...
+  </div>
+</div>
+
+<div class="ms-font-xxl" ng-show="vm.myGroups.length > 0">My Groups</div>
+
+<a href="index.html#/planner" title="Planner"><i class="ms-Icon ms-Icon--heart"></i>Switch to planneroverview</a>
+
+<div>
+  <input class="ms-input" ng-model="vm.groupTitle" />
+</div>
+
+<div class="ms-List ms-List--grid" ng-repeat="group in vm.myGroups | orderBy:'displayName'">
+  <div class="ms-ListItem" ng-click="vm.navigate($event, group.filesUrl)" title="View group documents">
+    <div class="ms-ListItem-image ms-bgColor-themeSecondary"><img ng-src="{{::group.picture}}" width="70" height="70" alt="{{::group.displayName}}"></div>
+    <span class="ms-ListItem-primaryText" title="{{::group.displayName}}">{{::group.displayName}}</span>
+    <span class="ms-ListItem-secondaryText">{{::group.description}}</span>
+    <span class="ms-ListItem-tertiaryText"></span>
+    <span class="ms-ListItem-metaText">{{::group.unseenCount}}</span>
+    <div class="ms-ListItem-selectionTarget js-toggleSelection"></div>
+    <div class="ms-ListItem-actions">
+      <a href="{{::group.conversationsUrl}}" class="ms-ListItem-action" title="Conversations" target="_blank"><i class="ms-Icon ms-Icon--chat"></i></a>
+      <a href="{{::group.calendarUrl}}" class="ms-ListItem-action" title="Calendar" target="_blank"><i class="ms-Icon ms-Icon--calendar"></i></a>
+      <a href="{{::group.filesUrl}}" class="ms-ListItem-action" title="Documents" target="_blank"><i class="ms-Icon ms-Icon--documents"></i></a>
+    </div>
+  </div>
+</div>
+<div class="ms-u-clearfix"></div>
+
+<script>
+	fabric.Spinner(jQuery('.mv-spinner')[0]).start();
+</script>
